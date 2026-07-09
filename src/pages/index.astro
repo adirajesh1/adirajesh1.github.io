@@ -1,0 +1,114 @@
+---
+import { getCollection } from "astro:content";
+import ContentCard from "@components/ContentCard.astro";
+import SiteLayout from "@layouts/SiteLayout.astro";
+import { entrySlug } from "../lib/content";
+
+const blogPosts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const memos = (await getCollection("memos", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2);
+
+const projects = [
+  {
+    title: "Forecasting experiments",
+    description: "Applied statistics and data modeling work, collected here as the portfolio fills out.",
+    tags: ["statistics", "data"],
+  },
+  {
+    title: "Personal research notes",
+    description: "A place for compact memos on tools, books, systems, and ideas worth revisiting.",
+    tags: ["notes", "writing"],
+  },
+];
+---
+
+<SiteLayout description="The personal site of Aditya Rajesh: stats, data, technology, writing, and projects.">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Stats / Data / Tech</p>
+      <h1>Hi, I'm Aditya</h1>
+      <p class="lede">
+        I explore practical questions with statistics, data, and technology. This is a home for
+        projects, notes, and writing as the work develops.
+      </p>
+      <div class="link-row" aria-label="Primary links">
+        <a class="button-link" href="https://github.com/adirajesh1">GitHub</a>
+        <a class="button-link secondary" href="mailto:aditya-rajesh@outlook.com">Email</a>
+      </div>
+    </div>
+    <aside class="hero-panel" aria-label="Current focus">
+      <p class="eyebrow">Currently</p>
+      <p>
+        Building a cleaner place to publish thoughtful technical notes, project writeups, and
+        useful references.
+      </p>
+    </aside>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2>Recent writing</h2>
+        <p>Short posts and longer notes, sorted newest first.</p>
+      </div>
+      <a class="view-all" href="/blog">View blog</a>
+    </div>
+    <div class="grid">
+      {blogPosts.map((post) => (
+        <ContentCard
+          href={`/blog/${entrySlug(post)}`}
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2>Selected projects</h2>
+        <p>A starting shelf for stats, data, and software work.</p>
+      </div>
+      <a class="view-all" href="/portfolio">View portfolio</a>
+    </div>
+    <div class="grid">
+      {projects.map((project) => (
+        <article class="card">
+          <h3>{project.title}</h3>
+          <p>{project.description}</p>
+          <div class="tag-list">
+            {project.tags.map((tag) => <span class="tag">{tag}</span>)}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2>Memos</h2>
+        <p>References and compact notes worth keeping close.</p>
+      </div>
+      <a class="view-all" href="/memos">View memos</a>
+    </div>
+    <div class="list">
+      {memos.map((memo) => (
+        <ContentCard
+          href={`/memos/${entrySlug(memo)}`}
+          title={memo.data.title}
+          description={memo.data.description}
+          date={memo.data.date}
+          tags={memo.data.tags}
+        />
+      ))}
+    </div>
+  </section>
+</SiteLayout>

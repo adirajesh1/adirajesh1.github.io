@@ -1,0 +1,34 @@
+---
+import { getCollection, render } from "astro:content";
+import SiteLayout from "@layouts/SiteLayout.astro";
+import { entrySlug } from "../../lib/content";
+
+export async function getStaticPaths() {
+  const memos = await getCollection("memos", ({ data }) => !data.draft);
+  return memos.map((memo) => ({
+    params: { slug: entrySlug(memo) },
+    props: { memo },
+  }));
+}
+
+const { memo } = Astro.props;
+const { Content } = await render(memo);
+const formattedDate = memo.data.date.toLocaleDateString("en-US", {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+});
+---
+
+<SiteLayout title={memo.data.title} description={memo.data.description}>
+  <article class="prose">
+    <a class="back-link" href="/memos">Back to memos</a>
+    <p class="eyebrow">Memo</p>
+    <h1>{memo.data.title}</h1>
+    <div class="meta">
+      <time datetime={memo.data.date.toISOString()}>{formattedDate}</time>
+      {memo.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+    </div>
+    <Content />
+  </article>
+</SiteLayout>

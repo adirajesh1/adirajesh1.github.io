@@ -1,0 +1,24 @@
+---
+const navItems = [
+  { href: "/blog", label: "Blog" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/memos", label: "Memos" },
+  { href: "/misc", label: "Misc" },
+];
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) => href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+---
+
+<header class="site-header">
+  <nav class="site-shell site-nav" aria-label="Primary navigation">
+    <a class="brand" href="/">Aditya Rajesh</a>
+    <div class="nav-links">
+      {navItems.map((item) => (
+        <a class="nav-link" href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>

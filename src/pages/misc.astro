@@ -1,0 +1,33 @@
+---
+import SiteLayout from "@layouts/SiteLayout.astro";
+
+const links = [
+  {
+    title: "Works in Progress",
+    href: "https://worksinprogress.co/",
+    description: "Long-form writing on science, technology, and progress.",
+  },
+  {
+    title: "Mrityunjay",
+    href: "https://www.amazon.com/Mrityunjay-Shivaji-Sawant/dp/8126317426",
+    description: "A saved reading reference from the original site.",
+  },
+];
+---
+
+<SiteLayout title="Misc" description="Miscellaneous links and references collected by Aditya Rajesh.">
+  <header class="page-header">
+    <p class="eyebrow">Collected</p>
+    <h1>Misc</h1>
+    <p>Loose links, references, and things that do not need a heavier category yet.</p>
+  </header>
+
+  <div class="list">
+    {links.map((link) => (
+      <a class="card" href={link.href}>
+        <h3>{link.title}</h3>
+        <p>{link.description}</p>
+      </a>
+    ))}
+  </div>
+</SiteLayout>

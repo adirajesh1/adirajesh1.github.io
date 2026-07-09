@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content";
+import ContentCard from "@components/ContentCard.astro";
+import SiteLayout from "@layouts/SiteLayout.astro";
+import { entrySlug } from "../../lib/content";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<SiteLayout title="Blog" description="Writing from Aditya Rajesh on stats, data, and technology.">
+  <header class="page-header">
+    <p class="eyebrow">Writing</p>
+    <h1>Blog</h1>
+    <p>Posts on statistics, data, technology, and whatever is currently interesting.</p>
+  </header>
+
+  <div class="list">
+    {posts.map((post) => (
+      <ContentCard
+        href={`/blog/${entrySlug(post)}`}
+        title={post.data.title}
+        description={post.data.description}
+        date={post.data.date}
+        tags={post.data.tags}
+      />
+    ))}
+  </div>
+</SiteLayout>
