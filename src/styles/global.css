@@ -84,7 +84,7 @@ img {
   display: flex;
   min-height: 4.25rem;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 1rem;
 }
 
@@ -98,6 +98,7 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-left: auto;
 }
 
 .nav-link {
