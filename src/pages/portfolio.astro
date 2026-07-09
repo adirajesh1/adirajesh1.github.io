@@ -6,35 +6,26 @@ const projects = [
     title: "Forecasting experiments",
     description:
       "Applied modeling and evaluation work around time series, prediction, and statistical decision-making.",
-    status: "In progress",
-    tags: ["statistics", "forecasting", "python"],
   },
   {
     title: "Data notes archive",
     description:
       "A growing collection of compact writeups that turn technical exploration into reusable notes.",
-    status: "Building",
-    tags: ["writing", "data", "research"],
   },
 ];
 ---
 
 <SiteLayout title="Portfolio" description="Selected stats, data, and technology projects by Aditya Rajesh.">
   <header class="page-header">
-    <p class="eyebrow">Work</p>
     <h1>Portfolio</h1>
-    <p>Selected projects and experiments. This page is structured for real case studies as they are added.</p>
+    <p>Selected projects and experiments.</p>
   </header>
 
-  <div class="grid">
+  <div class="list">
     {projects.map((project) => (
-      <article class="card">
+      <article class="entry">
         <h3>{project.title}</h3>
         <p>{project.description}</p>
-        <div class="meta">
-          <span>{project.status}</span>
-          {project.tags.map((tag) => <span class="tag">{tag}</span>)}
-        </div>
       </article>
     ))}
   </div>

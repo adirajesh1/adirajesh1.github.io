@@ -15,13 +15,13 @@ const formattedDate = date?.toLocaleDateString("en-US", {
 });
 ---
 
-<a class="card" href={href}>
-  <h3>{title}</h3>
+<article class="entry">
+  <h3><a href={href}>{title}</a></h3>
   <p>{description}</p>
   {(formattedDate || tags.length > 0) && (
     <div class="meta">
       {formattedDate && <time datetime={date?.toISOString()}>{formattedDate}</time>}
-      {tags.map((tag) => <span class="tag">{tag}</span>)}
+      {tags.length > 0 && <span>{tags.join(", ")}</span>}
     </div>
   )}
-</a>
+</article>

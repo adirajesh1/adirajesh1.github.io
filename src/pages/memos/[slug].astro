@@ -23,11 +23,10 @@ const formattedDate = memo.data.date.toLocaleDateString("en-US", {
 <SiteLayout title={memo.data.title} description={memo.data.description}>
   <article class="prose">
     <a class="back-link" href="/memos">Back to memos</a>
-    <p class="eyebrow">Memo</p>
     <h1>{memo.data.title}</h1>
     <div class="meta">
       <time datetime={memo.data.date.toISOString()}>{formattedDate}</time>
-      {memo.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+      {memo.data.tags.length > 0 && <span>{memo.data.tags.join(", ")}</span>}
     </div>
     <Content />
   </article>

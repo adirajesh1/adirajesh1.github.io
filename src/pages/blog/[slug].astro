@@ -23,11 +23,10 @@ const formattedDate = post.data.date.toLocaleDateString("en-US", {
 <SiteLayout title={post.data.title} description={post.data.description}>
   <article class="prose">
     <a class="back-link" href="/blog">Back to blog</a>
-    <p class="eyebrow">Blog</p>
     <h1>{post.data.title}</h1>
     <div class="meta">
       <time datetime={post.data.date.toISOString()}>{formattedDate}</time>
-      {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+      {post.data.tags.length > 0 && <span>{post.data.tags.join(", ")}</span>}
     </div>
     <Content />
   </article>
