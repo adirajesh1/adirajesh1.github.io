@@ -1,0 +1,44 @@
+---
+import SiteLayout from "@layouts/SiteLayout.astro";
+
+const updated = "July 9, 2026";
+
+const focus = [
+  "Cleaning up this site into a simple place for writing, projects, and personal logs.",
+  "Working through stats, data, and technology topics that are useful enough to write down.",
+];
+
+const learning = [
+  "Better systems for keeping notes and project summaries current.",
+  "How to keep a personal website useful without adding unnecessary interface.",
+];
+---
+
+<SiteLayout title="Now" description="What Aditya Rajesh is focused on right now.">
+  <header class="page-header">
+    <h1>Now</h1>
+    <p>Updated {updated}.</p>
+  </header>
+
+  <section class="section">
+    <h2>Focus</h2>
+    <div class="list">
+      {focus.map((item) => (
+        <article class="entry">
+          <p>{item}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Learning</h2>
+    <div class="list">
+      {learning.map((item) => (
+        <article class="entry">
+          <p>{item}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</SiteLayout>

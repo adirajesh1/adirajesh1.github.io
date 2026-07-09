@@ -1,0 +1,98 @@
+---
+import SiteLayout from "@layouts/SiteLayout.astro";
+
+const books = [
+  {
+    title: "Mrityunjay",
+    author: "Shivaji Sawant",
+    status: "reading",
+    notes: "Currently on the reading list.",
+  },
+  {
+    title: "Works in Progress",
+    author: "Various",
+    status: "reading",
+    notes: "Following essays and long-form pieces.",
+  },
+];
+
+const games = [
+  {
+    title: "Add current game",
+    platform: "PC",
+    status: "playing",
+    notes: "Replace this with what you are playing now.",
+  },
+  {
+    title: "Add finished game",
+    platform: "PC",
+    status: "played",
+    notes: "Replace this with a completed game.",
+  },
+];
+
+const reading = books.filter((book) => book.status === "reading");
+const read = books.filter((book) => book.status === "read");
+const playing = games.filter((game) => game.status === "playing");
+const played = games.filter((game) => game.status === "played");
+---
+
+<SiteLayout title="Tracking" description="Reading and game log from Aditya Rajesh.">
+  <header class="page-header">
+    <h1>Tracking</h1>
+    <p>Books, essays, and games I am reading, playing, or have finished.</p>
+  </header>
+
+  <section class="tracking-section">
+    <h2>Reading</h2>
+    <div class="list">
+      {reading.map((book) => (
+        <article class="entry">
+          <h3>{book.title}</h3>
+          <div class="meta"><span>{book.author}</span></div>
+          {book.notes && <p>{book.notes}</p>}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="tracking-section">
+    <h2>Read</h2>
+    <div class="list">
+      {read.length === 0 && <p>No finished books logged yet.</p>}
+      {read.map((book) => (
+        <article class="entry">
+          <h3>{book.title}</h3>
+          <div class="meta"><span>{book.author}</span></div>
+          {book.notes && <p>{book.notes}</p>}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="tracking-section">
+    <h2>Playing</h2>
+    <div class="list">
+      {playing.map((game) => (
+        <article class="entry">
+          <h3>{game.title}</h3>
+          <div class="meta"><span>{game.platform}</span></div>
+          {game.notes && <p>{game.notes}</p>}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="tracking-section">
+    <h2>Played</h2>
+    <div class="list">
+      {played.map((game) => (
+        <article class="entry">
+          <h3>{game.title}</h3>
+          <div class="meta"><span>{game.platform}</span></div>
+          {game.notes && <p>{game.notes}</p>}
+        </article>
+      ))}
+    </div>
+  </section>
+</SiteLayout>

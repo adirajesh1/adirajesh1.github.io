@@ -1,8 +1,6 @@
 :root {
   --max-width: 720px;
   --font-mono: "Geist Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  --font-sans: Aptos, Inter, "SF Pro Text", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: Georgia, "Times New Roman", serif;
 }
 
 :root[data-theme="dark"] {
@@ -25,21 +23,8 @@
   --control-bg: #ffffff;
 }
 
-:root[data-font="mono"] {
-  --font-body: var(--font-mono);
-}
-
-:root[data-font="sans"] {
-  --font-body: var(--font-sans);
-}
-
-:root[data-font="serif"] {
-  --font-body: var(--font-serif);
-}
-
 :root {
-  font-family:
-    var(--font-body), "Geist Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-family: var(--font-mono);
 }
 
 * {
@@ -95,6 +80,7 @@ img {
 }
 
 .site-nav {
+  position: relative;
   display: flex;
   min-height: 4.25rem;
   align-items: center;
@@ -126,31 +112,20 @@ img {
   color: var(--text);
 }
 
-.site-controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.55rem;
-}
-
-.control-button,
-.font-control select {
+.theme-toggle {
+  display: inline-grid;
+  width: 2rem;
+  height: 2rem;
+  flex: 0 0 auto;
+  place-items: center;
   border: 1px solid var(--line);
-  border-radius: 0;
+  border-radius: 999px;
   background: var(--control-bg);
   color: var(--text);
+  cursor: pointer;
   font: inherit;
-  font-size: 0.82rem;
+  font-size: 1rem;
   line-height: 1;
-  padding: 0.35rem 0.45rem;
-}
-
-.font-control {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: var(--muted);
-  font-size: 0.82rem;
 }
 
 .page {
@@ -197,10 +172,18 @@ h3 {
   margin-top: 2rem;
 }
 
+.section h2 {
+  margin-bottom: 2rem;
+}
+
 .list,
 .post-list {
   display: grid;
   gap: 1.5rem;
+}
+
+.tracking-section + .tracking-section {
+  margin-top: 2.5rem;
 }
 
 .entry p {
@@ -268,6 +251,12 @@ h3 {
 
   .nav-links {
     margin-left: 0;
+  }
+
+  .theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 0;
   }
 
   .page {

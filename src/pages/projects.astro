@@ -1,0 +1,47 @@
+---
+import SiteLayout from "@layouts/SiteLayout.astro";
+
+interface Project {
+  title: string;
+  summary: string;
+  github?: string;
+  link?: string;
+}
+
+const projects: Project[] = [
+  {
+    title: "Forecasting experiments",
+    summary:
+      "Applied modeling and evaluation work around time series, prediction, and statistical decision-making.",
+    github: "https://github.com/adirajesh1",
+  },
+  {
+    title: "Data notes archive",
+    summary: "A growing collection of compact writeups from technical exploration.",
+    github: "https://github.com/adirajesh1",
+  },
+];
+---
+
+<SiteLayout title="Projects" description="Projects and experiments by Aditya Rajesh.">
+  <header class="page-header">
+    <h1>Projects</h1>
+    <p>GitHub links and short summaries for things I am building or exploring.</p>
+  </header>
+
+  <div class="list">
+    {projects.map((project) => (
+      <article class="entry">
+        <h3>{project.title}</h3>
+        <p>{project.summary}</p>
+        {(project.github || project.link) && (
+          <p>
+            {project.github && <a href={project.github}>GitHub</a>}
+            {project.github && project.link && <span aria-hidden="true"> / </span>}
+            {project.link && <a href={project.link}>Link</a>}
+          </p>
+        )}
+      </article>
+    ))}
+  </div>
+</SiteLayout>

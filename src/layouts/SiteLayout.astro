@@ -17,7 +17,7 @@ const pageTitle = title === "Aditya Rajesh" ? title : `${title} | Aditya Rajesh`
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark" data-font="mono">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,9 +32,7 @@ const pageTitle = title === "Aditya Rajesh" ? title : `${title} | Aditya Rajesh`
     />
     <script is:inline>
       const theme = localStorage.getItem("theme") || "dark";
-      const font = localStorage.getItem("font") || "mono";
       document.documentElement.dataset.theme = theme;
-      document.documentElement.dataset.font = font;
     </script>
     <title>{pageTitle}</title>
   </head>

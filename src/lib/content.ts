@@ -1,7 +1,5 @@
 import type { CollectionEntry } from "astro:content";
 
-type WritingEntry = CollectionEntry<"blog"> | CollectionEntry<"memos">;
-
-export function entrySlug(entry: WritingEntry) {
+export function entrySlug(entry: CollectionEntry<"blog">) {
   return entry.id.replace(/\.(md|mdx)$/, "");
 }

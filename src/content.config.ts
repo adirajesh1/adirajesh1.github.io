@@ -15,9 +15,4 @@ const blog = defineCollection({
   schema: writingSchema,
 });
 
-const memos = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/memos" }),
-  schema: writingSchema,
-});
-
-export const collections = { blog, memos };
+export const collections = { blog };
