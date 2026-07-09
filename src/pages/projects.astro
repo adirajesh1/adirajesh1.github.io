@@ -4,21 +4,67 @@ import SiteLayout from "@layouts/SiteLayout.astro";
 interface Project {
   title: string;
   summary: string;
-  github?: string;
-  link?: string;
+  problem: string;
+  built: string;
+  stack: string;
+  learned: string;
+  status: "complete" | "in progress";
+  links?: {
+    label: string;
+    href: string;
+  }[];
 }
 
+// Add project-specific GitHub/demo/writeup links here when they are public.
 const projects: Project[] = [
   {
-    title: "Forecasting experiments",
-    summary:
-      "Applied modeling and evaluation work around time series, prediction, and statistical decision-making.",
-    github: "https://github.com/adirajesh1",
+    title: "Natural Gas Storage Forecasting",
+    summary: "A forecasting project for reasoning about natural gas storage levels and market-relevant inventory changes.",
+    problem:
+      "Energy market data is noisy, seasonal, and sensitive to weather, demand, supply, and calendar effects. A useful forecast needs to make those assumptions visible instead of hiding them behind a single number.",
+    built:
+      "I am building a reproducible forecasting workflow that frames storage changes as a time-series problem, compares baseline and machine-learning approaches, and keeps evaluation explicit.",
+    stack: "Python, pandas, scikit-learn, statsmodels, time-series validation",
+    learned:
+      "Forecasting quality depends as much on feature design, leakage control, and evaluation windows as it does on model choice.",
+    status: "in progress",
   },
   {
-    title: "Data notes archive",
-    summary: "A growing collection of compact writeups from technical exploration.",
-    github: "https://github.com/adirajesh1",
+    title: "Research Article Critical Appraisal / Literature Review Assistant",
+    summary: "A practical AI-assisted workflow for reading research papers more carefully and consistently.",
+    problem:
+      "Research papers are dense, and it is easy to summarize them without checking study design, assumptions, evidence quality, and limitations.",
+    built:
+      "I am prototyping a structured assistant that helps extract claims, identify methodology, flag limitations, and produce a critical appraisal rather than a generic summary.",
+    stack: "Python, LLM prompting, structured outputs, document parsing",
+    learned:
+      "The useful part of AI assistance is not speed alone; it is forcing a repeatable review process with explicit questions and failure checks.",
+    status: "in progress",
+  },
+  {
+    title: "Character-Level Language Model / Bigram Model",
+    summary: "A small language-modeling project for understanding token prediction from first principles.",
+    problem:
+      "Modern language models are difficult to reason about if the basics of sequence modeling, loss, sampling, and training loops stay abstract.",
+    built:
+      "I built a character-level model starting with bigram probabilities and used it to understand how simple statistical structure turns into generated text.",
+    stack: "Python, PyTorch, probability, model evaluation",
+    learned:
+      "Even simple models make the core workflow concrete: represent data, define a loss, train against examples, sample outputs, and inspect failure modes.",
+    status: "complete",
+  },
+  {
+    title: "Personal Website",
+    summary: "A minimal Astro site for writing, projects, and public notes.",
+    problem:
+      "A portfolio needs to be more than a list of links; it should explain what I work on, how I think, and where the work is going.",
+    built:
+      "I rebuilt the site as a static Astro project with a small content system, clean navigation, dark/light mode, and focused pages for projects, writing, and current work.",
+    stack: "Astro, TypeScript, CSS, GitHub Pages",
+    learned:
+      "A simple site is easier to maintain when the structure is clear and the content is specific.",
+    status: "in progress",
+    links: [{ label: "GitHub", href: "https://github.com/adirajesh1/adirajesh1.github.io" }],
   },
 ];
 ---
@@ -26,7 +72,7 @@ const projects: Project[] = [
 <SiteLayout title="Projects" description="Projects and experiments by Aditya Rajesh.">
   <header class="page-header">
     <h1>Projects</h1>
-    <p>GitHub links and short summaries for things I am building or exploring.</p>
+    <p>Forecasting, automation, practical AI tools, and small software projects.</p>
   </header>
 
   <div class="list">
@@ -34,13 +80,31 @@ const projects: Project[] = [
       <article class="entry">
         <h3>{project.title}</h3>
         <p>{project.summary}</p>
-        {(project.github || project.link) && (
-          <p>
-            {project.github && <a href={project.github}>GitHub</a>}
-            {project.github && project.link && <span aria-hidden="true"> / </span>}
-            {project.link && <a href={project.link}>Link</a>}
-          </p>
-        )}
+        <dl class="project-details">
+          <dt>Problem</dt>
+          <dd>{project.problem}</dd>
+          <dt>What I built</dt>
+          <dd>{project.built}</dd>
+          <dt>Stack</dt>
+          <dd>{project.stack}</dd>
+          <dt>What I learned</dt>
+          <dd>{project.learned}</dd>
+          <dt>Status</dt>
+          <dd>{project.status}</dd>
+          <dt>Links</dt>
+          <dd>
+            {project.links && project.links.length > 0 ? (
+              project.links.map((link, index) => (
+                <>
+                  {index > 0 && <span aria-hidden="true"> / </span>}
+                  <a href={link.href}>{link.label}</a>
+                </>
+              ))
+            ) : (
+              <span>Not public yet</span>
+            )}
+          </dd>
+        </dl>
       </article>
     ))}
   </div>

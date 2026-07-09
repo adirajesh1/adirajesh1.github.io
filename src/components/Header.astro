@@ -1,13 +1,16 @@
 ---
 const navItems = [
-  { href: "/blog", label: "Blog" },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
+  { href: "/blog", label: "Writing" },
   { href: "/now", label: "Now" },
-  { href: "/tracking", label: "Tracking" },
+  { href: "https://github.com/adirajesh1", label: "GitHub", external: true },
 ];
 
 const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
-const isActive = (href: string) => href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+const isActive = (href: string, external?: boolean) =>
+  external ? false : href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 ---
 
 <header class="site-header">
@@ -15,12 +18,16 @@ const isActive = (href: string) => href === "/" ? pathname === "/" : pathname ==
     <a class="brand" href="/">Aditya Rajesh</a>
     <div class="nav-links">
       {navItems.map((item) => (
-        <a class="nav-link" href={item.href} aria-current={isActive(item.href) ? "page" : undefined}>
+        <a
+          class="nav-link"
+          href={item.href}
+          aria-current={isActive(item.href, item.external) ? "page" : undefined}
+        >
           {item.label}
         </a>
       ))}
     </div>
-    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode">◐</button>
+    <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode">&#9680;</button>
   </nav>
 </header>
 
@@ -31,7 +38,7 @@ const isActive = (href: string) => href === "/" ? pathname === "/" : pathname ==
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("theme", theme);
     if (themeToggle) {
-      themeToggle.textContent = theme === "dark" ? "☾" : "☀";
+      themeToggle.textContent = theme === "dark" ? "\u263e" : "\u2600";
       themeToggle.setAttribute(
         "aria-label",
         theme === "dark" ? "Switch to light mode" : "Switch to dark mode",

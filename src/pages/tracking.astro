@@ -3,31 +3,37 @@ import SiteLayout from "@layouts/SiteLayout.astro";
 
 const books = [
   {
-    title: "Mrityunjay",
-    author: "Shivaji Sawant",
+    title: "The World for Sale",
+    creator: "Javier Blas and Jack Farchy",
     status: "reading",
-    notes: "Currently on the reading list.",
+    notes: "Commodity markets, trading firms, and resource flows.",
   },
   {
-    title: "Works in Progress",
-    author: "Various",
+    title: "Designing Data-Intensive Applications",
+    creator: "Martin Kleppmann",
     status: "reading",
-    notes: "Following essays and long-form pieces.",
+    notes: "Systems, databases, and tradeoffs behind modern software.",
+  },
+  {
+    title: "Mrityunjay",
+    creator: "Shivaji Sawant",
+    status: "read",
+    notes: "Historical fiction with a mythological frame and a strong point of view.",
   },
 ];
 
 const games = [
   {
-    title: "Add current game",
+    title: "Factorio",
     platform: "PC",
     status: "playing",
-    notes: "Replace this with what you are playing now.",
+    notes: "Automation, logistics, and production systems.",
   },
   {
-    title: "Add finished game",
+    title: "Civilization VI",
     platform: "PC",
-    status: "played",
-    notes: "Replace this with a completed game.",
+    status: "playing",
+    notes: "Strategy, incentives, resource allocation, and long-term planning.",
   },
 ];
 
@@ -40,59 +46,75 @@ const played = games.filter((game) => game.status === "played");
 <SiteLayout title="Tracking" description="Reading and game log from Aditya Rajesh.">
   <header class="page-header">
     <h1>Tracking</h1>
-    <p>Books, essays, and games I am reading, playing, or have finished.</p>
+    <p>Books, essays, and games, kept intentionally short.</p>
   </header>
 
-  <section class="tracking-section">
-    <h2>Reading</h2>
-    <div class="list">
-      {reading.map((book) => (
-        <article class="entry">
-          <h3>{book.title}</h3>
-          <div class="meta"><span>{book.author}</span></div>
-          {book.notes && <p>{book.notes}</p>}
-        </article>
-      ))}
-    </div>
+  <section class="tracking-grid" aria-label="Current tracking">
+    <article class="tracking-section">
+      <h2>Reading</h2>
+      <table class="tracking-table">
+        <tbody>
+          {reading.slice(0, 5).map((book) => (
+            <tr>
+              <th scope="row">{book.title}</th>
+              <td>{book.creator}</td>
+              <td>{book.notes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </article>
+
+    <article class="tracking-section">
+      <h2>Playing</h2>
+      <table class="tracking-table">
+        <tbody>
+          {playing.slice(0, 5).map((game) => (
+            <tr>
+              <th scope="row">{game.title}</th>
+              <td>{game.platform}</td>
+              <td>{game.notes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </article>
   </section>
 
-  <section class="tracking-section">
-    <h2>Read</h2>
-    <div class="list">
-      {read.length === 0 && <p>No finished books logged yet.</p>}
-      {read.map((book) => (
-        <article class="entry">
-          <h3>{book.title}</h3>
-          <div class="meta"><span>{book.author}</span></div>
-          {book.notes && <p>{book.notes}</p>}
-        </article>
-      ))}
-    </div>
-  </section>
+  <section class="tracking-grid tracking-grid-secondary" aria-label="Completed tracking">
+    <article class="tracking-section">
+      <h2>Read</h2>
+      <table class="tracking-table">
+        <tbody>
+          {read.slice(0, 5).map((book) => (
+            <tr>
+              <th scope="row">{book.title}</th>
+              <td>{book.creator}</td>
+              <td>{book.notes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </article>
 
-  <section class="tracking-section">
-    <h2>Playing</h2>
-    <div class="list">
-      {playing.map((game) => (
-        <article class="entry">
-          <h3>{game.title}</h3>
-          <div class="meta"><span>{game.platform}</span></div>
-          {game.notes && <p>{game.notes}</p>}
-        </article>
-      ))}
-    </div>
-  </section>
-
-  <section class="tracking-section">
-    <h2>Played</h2>
-    <div class="list">
-      {played.map((game) => (
-        <article class="entry">
-          <h3>{game.title}</h3>
-          <div class="meta"><span>{game.platform}</span></div>
-          {game.notes && <p>{game.notes}</p>}
-        </article>
-      ))}
-    </div>
+    <article class="tracking-section">
+      <h2>Played</h2>
+      <table class="tracking-table">
+        <tbody>
+          {played.length === 0 && (
+            <tr>
+              <td colspan="3">No completed games logged yet.</td>
+            </tr>
+          )}
+          {played.slice(0, 5).map((game) => (
+            <tr>
+              <th scope="row">{game.title}</th>
+              <td>{game.platform}</td>
+              <td>{game.notes}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </article>
   </section>
 </SiteLayout>

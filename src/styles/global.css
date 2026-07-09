@@ -186,6 +186,68 @@ h3 {
   margin-top: 2.5rem;
 }
 
+.project-details {
+  display: grid;
+  gap: 0.35rem 1rem;
+  grid-template-columns: minmax(8rem, max-content) 1fr;
+  margin: 1rem 0 0;
+}
+
+.project-details dt {
+  color: var(--text);
+  font-weight: 650;
+}
+
+.project-details dd {
+  color: var(--muted);
+  margin: 0;
+}
+
+.tracking-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.tracking-grid-secondary {
+  border-top: 1px solid var(--line);
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+}
+
+.tracking-section {
+  min-width: 0;
+}
+
+.tracking-section h2 {
+  margin-bottom: 1rem;
+}
+
+.tracking-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tracking-table th,
+.tracking-table td {
+  border-top: 1px solid var(--line);
+  padding: 0.65rem 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.tracking-table th {
+  color: var(--text);
+  font-weight: 650;
+  padding-right: 1rem;
+}
+
+.tracking-table td {
+  color: var(--muted);
+  padding-right: 1rem;
+}
+
 .entry p {
   margin: 0.35rem 0 0;
 }
@@ -225,13 +287,6 @@ h3 {
   text-decoration: none;
 }
 
-.site-footer {
-  border-top: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 0.9rem;
-  padding: 2rem 0;
-}
-
 .social-links,
 .more-links {
   margin-top: 1.25rem;
@@ -251,6 +306,16 @@ h3 {
 
   .nav-links {
     margin-left: 0;
+  }
+
+  .project-details,
+  .tracking-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tracking-table {
+    display: block;
+    overflow-x: auto;
   }
 
   .theme-toggle {

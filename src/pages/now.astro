@@ -3,27 +3,51 @@ import SiteLayout from "@layouts/SiteLayout.astro";
 
 const updated = "July 9, 2026";
 
-const focus = [
-  "Cleaning up this site into a simple place for writing, projects, and personal logs.",
-  "Working through stats, data, and technology topics that are useful enough to write down.",
+const building = [
+  "A natural gas storage forecasting project focused on careful evaluation and market-relevant assumptions.",
+  "A literature review assistant that pushes AI summaries toward structured critical appraisal.",
+  "This site as a public record of projects, writing, and learning.",
 ];
 
 const learning = [
-  "Better systems for keeping notes and project summaries current.",
-  "How to keep a personal website useful without adding unnecessary interface.",
+  "Time-series forecasting, model evaluation, and how to avoid leakage in practical data work.",
+  "Small automation patterns for reconciliation, reporting, document review, and operational workflows.",
+  "How practical AI tools can support analytical work without replacing judgment.",
+];
+
+const reading = [
+  {
+    title: "The World for Sale",
+    note: "commodity markets, trading firms, and resource flows",
+  },
+  {
+    title: "Designing Data-Intensive Applications",
+    note: "systems, databases, and tradeoffs behind modern software",
+  },
+];
+
+const playing = [
+  {
+    title: "Factorio",
+    note: "automation, logistics, and production systems",
+  },
+  {
+    title: "Civilization VI",
+    note: "strategy, incentives, resource allocation, and long-term planning",
+  },
 ];
 ---
 
 <SiteLayout title="Now" description="What Aditya Rajesh is focused on right now.">
   <header class="page-header">
     <h1>Now</h1>
-    <p>Updated {updated}.</p>
+    <p>Updated {updated}. Current work, reading, and a few durable interests.</p>
   </header>
 
   <section class="section">
-    <h2>Focus</h2>
+    <h2>What I'm building</h2>
     <div class="list">
-      {focus.map((item) => (
+      {building.map((item) => (
         <article class="entry">
           <p>{item}</p>
         </article>
@@ -32,7 +56,7 @@ const learning = [
   </section>
 
   <section class="section">
-    <h2>Learning</h2>
+    <h2>What I'm learning</h2>
     <div class="list">
       {learning.map((item) => (
         <article class="entry">
@@ -41,4 +65,30 @@ const learning = [
       ))}
     </div>
   </section>
+
+  <section class="section">
+    <h2>What I'm reading</h2>
+    <div class="list">
+      {reading.map((item) => (
+        <article class="entry">
+          <h3>{item.title}</h3>
+          <p>{item.note}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>What I'm playing</h2>
+    <div class="list">
+      {playing.map((item) => (
+        <article class="entry">
+          <h3>{item.title}</h3>
+          <p>{item.note}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <p class="more-links"><a href="/tracking">Full tracking log</a></p>
 </SiteLayout>
