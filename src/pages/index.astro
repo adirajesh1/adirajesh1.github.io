@@ -6,20 +6,25 @@ import { entrySlug } from "../lib/content";
 
 const blogPosts = (await getCollection("blog", ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+  .slice(0, 8);
 
 const memos = (await getCollection("memos", ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 2);
+  .slice(0, 4);
+
+const latest = [
+  ...blogPosts.map((entry) => ({ ...entry, collectionLabel: "Post", href: `/blog/${entrySlug(entry)}` })),
+  ...memos.map((entry) => ({ ...entry, collectionLabel: "Memo", href: `/memos/${entrySlug(entry)}` })),
+].sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <SiteLayout description="The personal site of Aditya Rajesh: stats, data, technology, writing, and projects.">
   <section class="intro">
     <h1>Hi, I'm Aditya.</h1>
     <p>
-      I write about stats, data, technology, and things I am trying to understand.
+      Stats, data, technology, and notes on things I am trying to understand.
     </p>
-    <p>
+    <p class="social-links">
       <a href="https://github.com/adirajesh1">GitHub</a>
       <span aria-hidden="true"> / </span>
       <a href="mailto:aditya-rajesh@outlook.com">Email</a>
@@ -27,34 +32,22 @@ const memos = (await getCollection("memos", ({ data }) => !data.draft))
   </section>
 
   <section class="section">
-    <h2>Writing</h2>
-    <div class="list">
-      {blogPosts.map((post) => (
+    <h2>Latest</h2>
+    <div class="post-list">
+      {latest.map((entry) => (
         <ContentCard
-          href={`/blog/${entrySlug(post)}`}
-          title={post.data.title}
-          description={post.data.description}
-          date={post.data.date}
-          tags={post.data.tags}
+          href={entry.href}
+          title={entry.data.title}
+          description={entry.data.description}
+          date={entry.data.date}
+          tags={[entry.collectionLabel]}
         />
       ))}
     </div>
-    <p><a href="/blog">All posts</a></p>
-  </section>
-
-  <section class="section">
-    <h2>Memos</h2>
-    <div class="list">
-      {memos.map((memo) => (
-        <ContentCard
-          href={`/memos/${entrySlug(memo)}`}
-          title={memo.data.title}
-          description={memo.data.description}
-          date={memo.data.date}
-          tags={memo.data.tags}
-        />
-      ))}
-    </div>
-    <p><a href="/memos">All memos</a></p>
+    <p class="more-links">
+      <a href="/blog">All posts</a>
+      <span aria-hidden="true"> / </span>
+      <a href="/memos">All memos</a>
+    </p>
   </section>
 </SiteLayout>

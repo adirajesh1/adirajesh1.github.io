@@ -9,7 +9,7 @@ interface Props {
 
 const { href, title, description, date, tags = [] } = Astro.props;
 const formattedDate = date?.toLocaleDateString("en-US", {
-  month: "short",
+  month: "long",
   day: "numeric",
   year: "numeric",
 });
@@ -17,11 +17,13 @@ const formattedDate = date?.toLocaleDateString("en-US", {
 
 <article class="entry">
   <h3><a href={href}>{title}</a></h3>
-  <p>{description}</p>
   {(formattedDate || tags.length > 0) && (
     <div class="meta">
-      {formattedDate && <time datetime={date?.toISOString()}>{formattedDate}</time>}
+      {formattedDate && (
+        <span>Published: <time datetime={date?.toISOString()}>{formattedDate}</time></span>
+      )}
       {tags.length > 0 && <span>{tags.join(", ")}</span>}
     </div>
   )}
+  <p>{description}</p>
 </article>

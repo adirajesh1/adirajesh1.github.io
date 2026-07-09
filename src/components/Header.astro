@@ -20,5 +20,51 @@ const isActive = (href: string) => href === "/" ? pathname === "/" : pathname ==
         </a>
       ))}
     </div>
+    <div class="site-controls" aria-label="Display settings">
+      <button class="control-button" type="button" data-theme-toggle>Dark</button>
+      <label class="font-control">
+        <span>Font</span>
+        <select data-font-select>
+          <option value="mono">Geist Mono</option>
+          <option value="sans">Sans</option>
+          <option value="serif">Serif</option>
+        </select>
+      </label>
+    </div>
   </nav>
 </header>
+
+<script>
+  const themeToggle = document.querySelector("[data-theme-toggle]");
+  const fontSelect = document.querySelector("[data-font-select]");
+
+  function setTheme(theme: string) {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("theme", theme);
+    if (themeToggle) {
+      themeToggle.textContent = theme === "dark" ? "Dark" : "Light";
+    }
+  }
+
+  function setFont(font: string) {
+    document.documentElement.dataset.font = font;
+    localStorage.setItem("font", font);
+    if (fontSelect instanceof HTMLSelectElement) {
+      fontSelect.value = font;
+    }
+  }
+
+  setTheme(localStorage.getItem("theme") || "dark");
+  setFont(localStorage.getItem("font") || "mono");
+
+  themeToggle?.addEventListener("click", () => {
+    const nextTheme = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+  });
+
+  fontSelect?.addEventListener("change", (event) => {
+    if (event.target instanceof HTMLSelectElement) {
+      setFont(event.target.value);
+    }
+  });
+</script>
