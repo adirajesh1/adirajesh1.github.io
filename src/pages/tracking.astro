@@ -26,14 +26,100 @@ const games = [
   {
     title: "Cities: Skylines II",
     platform: "PC",
+    year: "2026",
     status: "playing",
     notes: "City systems, infrastructure, and long-term planning.",
   },
   {
     title: "Civilization VI",
     platform: "PC",
+    year: "2026",
     status: "playing",
     notes: "Strategy, incentives, resource allocation, and long-term planning.",
+  },
+  {
+    title: "Factorio",
+    platform: "PC",
+    year: "2024",
+    status: "played",
+    notes: "Automation, logistics, bottlenecks, and production systems.",
+  },
+  {
+    title: "The Farmer Was Replaced",
+    platform: "PC",
+    year: "2025",
+    status: "played",
+    notes: "Programming logic, automation loops, and incremental optimization.",
+  },
+  {
+    title: "Mini Metro",
+    platform: "PC",
+    year: "2023",
+    status: "played",
+    notes: "Network design, constraints, and simple systems under pressure.",
+  },
+  {
+    title: "Balatro",
+    platform: "PC",
+    year: "2024",
+    status: "played",
+    notes: "Probability, compounding effects, and building around constraints.",
+  },
+  {
+    title: "Portal 2",
+    platform: "PC",
+    year: "2024",
+    status: "played",
+    notes: "Spatial reasoning, puzzle design, and systems thinking.",
+  },
+  {
+    title: "Satisfactory",
+    platform: "PC",
+    year: "2025",
+    status: "played",
+    notes: "Factory planning, resource chains, and spatial logistics.",
+  },
+  {
+    title: "Hitman",
+    platform: "PC",
+    year: "2025",
+    status: "played",
+    notes: "Systems, constraints, and planning clean routes through messy spaces.",
+  },
+  {
+    title: "Neon White",
+    platform: "PC",
+    year: "2024",
+    status: "played",
+    notes: "Routing, optimization, and fast iteration.",
+  },
+  {
+    title: "Prince of Persia: The Lost Crown",
+    platform: "PC",
+    year: "2024",
+    status: "played",
+    notes: "Movement, timing, and clean level design.",
+  },
+  {
+    title: "Dishonored",
+    platform: "PC",
+    year: "2025",
+    status: "played",
+    notes: "Systems-driven stealth, player agency, and consequences.",
+  },
+  {
+    title: "King of the Bridge",
+    platform: "PC",
+    year: "2025",
+    status: "played",
+    notes: "Rules, deduction, and adversarial reasoning.",
+  },
+  {
+    title: "Clone Hero",
+    platform: "PC",
+    year: "2025",
+    status: "played",
+    notes: "Rhythm, execution, and deliberate practice.",
   },
 ];
 
@@ -46,7 +132,7 @@ const played = games.filter((game) => game.status === "played");
 <SiteLayout title="Tracking" description="Reading and game log from Aditya Rajesh.">
   <header class="page-header">
     <h1>Tracking</h1>
-    <p>Books, essays, and games, kept intentionally short.</p>
+    <p>Books, essays, and games through the lens of systems, design, strategy, and craft.</p>
   </header>
 
   <section class="tracking-stack" aria-label="Current tracking">
@@ -73,6 +159,7 @@ const played = games.filter((game) => game.status === "played");
             <tr>
               <th scope="row">{game.title}</th>
               <td>{game.platform}</td>
+              <td>{game.year}</td>
               <td>{game.notes}</td>
             </tr>
           ))}
@@ -103,13 +190,14 @@ const played = games.filter((game) => game.status === "played");
         <tbody>
           {played.length === 0 && (
             <tr>
-              <td colspan="3">No completed games logged yet.</td>
+              <td colspan="4">No completed games logged yet.</td>
             </tr>
           )}
-          {played.slice(0, 5).map((game) => (
+          {played.map((game) => (
             <tr>
               <th scope="row">{game.title}</th>
               <td>{game.platform}</td>
+              <td>{game.year}</td>
               <td>{game.notes}</td>
             </tr>
           ))}
